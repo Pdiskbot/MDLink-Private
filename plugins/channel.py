@@ -144,3 +144,19 @@ async def channel_link_handler(bot, message):
 					print("The given link is either excluded domain link or a droplink link")
 				else:
 					await message.edit_caption(link)
+					
+	# Join Button in Bottom of Every Posts
+	chat = await bot.get_chat(message.chat.id)
+
+	buttons = InlineKeyboardMarkup([
+		[
+			InlineKeyboardButton('Join', url=chat.invite_link),
+			InlineKeyboardButton('More Updates', url='https://t.me/T2linksAnnc')
+		]
+	])
+	
+	if message.text:
+		await message.edit(message.text, entities=message.entities, reply_markup=buttons, disable_web_page_preview=True)
+		
+	elif message.caption:
+		await message.edit(message.caption, entities=message.entities, reply_markup=buttons, disable_web_page_preview=True)
